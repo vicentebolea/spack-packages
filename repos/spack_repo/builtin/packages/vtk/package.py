@@ -218,6 +218,8 @@ class Vtk(CMakePackage):
         depends_on("seacas~mpi", when="~mpi")
         # seacas test executables use MPI but are linked without MPI libs on Windows
         depends_on("seacas~tests", when="platform=windows")
+        # seacas CGNS parallel I/O includes the unix-only sys/select.h
+        depends_on("seacas~cgns", when="platform=windows")
         depends_on("seacas@2021-05-12:2022-10-14", when="@9.1")
         # vtk@9.2: need Ioss::Utils::get_debug_stream() which only 2022-10-14 provides,
         # and to be safe against other issues, make them build with this version only:
